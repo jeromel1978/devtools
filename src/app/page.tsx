@@ -1,6 +1,6 @@
 "use client";
 import dynamic from "next/dynamic";
-import { Box, Tabs, Tab, Typography } from "@mui/material";
+import { Box, Tabs, Tab } from "@mui/material";
 import UUIDOptions from "../components/uuidoptions";
 import UUIDGen from "../components/uuid";
 import JSONReader from "../components/jsonreader";
@@ -72,26 +72,28 @@ export default function Home() {
   return (
     <>
       {!!DarkMode && (
-        <ThemeProvider theme={DarkMode === "dark" ? ThemeDark : ThemeLight}>
-          <CssBaseline />
-          <main className="flex flex-col">
-            <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-              <Tab label="UUID Generator" />
-              <Tab label="JSON Reader" />
-            </Tabs>
-            <TabPanel value={value} index={0}>
-              <UUIDOptions onCountChange={UpdateUUIDCount} onVersionChange={UpdateUUIDVersion} />
-              <Box sx={cssUUIDList}>
-                {UUIDArray.map((a, index) => (
-                  <UUIDGen key={index} version={UUIDVersion} />
-                ))}
-              </Box>
-            </TabPanel>
-            <TabPanel value={value} index={1}>
-              <JSONReader />
-            </TabPanel>
-          </main>
-        </ThemeProvider>
+        <>
+          <ThemeProvider theme={DarkMode === "dark" ? ThemeDark : ThemeLight}>
+            <CssBaseline />
+            <main className="flex flex-col">
+              <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+                <Tab label="UUID Generator" />
+                <Tab label="JSON Reader" />
+              </Tabs>
+              <TabPanel value={value} index={0}>
+                <UUIDOptions onCountChange={UpdateUUIDCount} onVersionChange={UpdateUUIDVersion} />
+                <Box sx={cssUUIDList}>
+                  {UUIDArray.map((a, index) => (
+                    <UUIDGen key={index} version={UUIDVersion} />
+                  ))}
+                </Box>
+              </TabPanel>
+              <TabPanel value={value} index={1}>
+                <JSONReader />
+              </TabPanel>
+            </main>
+          </ThemeProvider>
+        </>
       )}
     </>
   );
