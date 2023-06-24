@@ -1,7 +1,7 @@
 "use client";
 import dynamic from "next/dynamic";
 import { Box, Tabs, Tab, Typography } from "@mui/material";
-import UUIDGenCount from "../components/uuidcounter";
+import UUIDOptions from "../components/uuidoptions";
 import UUIDGen from "../components/uuid";
 import JSONReader from "../components/jsonreader";
 import { useState } from "react";
@@ -41,16 +41,20 @@ const TabPanel = (props: TabPanelProps) => {
 };
 export default function Home() {
   const [value, setValue] = useState(0);
+  const [UUIDArray, setUUIDArray] = useState<any[]>(["1"]);
+  const [UUIDVersion, setUUIDVersion] = useState<number>(4);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
-  const [UUIDArray, setUUIDArray] = useState<any[]>(["1"]);
 
-  const UpdateUUDCount = (Num: number) => {
+  const UpdateUUIDCount = (Num: number) => {
     let U: number[] = [];
     for (let i = 0; i < Num; i++) U.push(i);
     setUUIDArray(U);
+  };
+  const UpdateUUIDVersion = (Num: number) => {
+    setUUIDVersion(Num);
   };
   return (
     <main className="flex">
@@ -59,10 +63,10 @@ export default function Home() {
         <Tab label="JSON Reader" />
       </Tabs>
       <TabPanel value={value} index={0}>
-        <UUIDGenCount onChange={UpdateUUDCount} />
+        <UUIDOptions onCountChange={UpdateUUIDCount} onVersionChange={UpdateUUIDVersion} />
         <Box sx={cssUUIDList}>
           {UUIDArray.map((a, index) => (
-            <UUIDGen key={index} />
+            <UUIDGen key={index} version={UUIDVersion} />
           ))}
         </Box>
       </TabPanel>
