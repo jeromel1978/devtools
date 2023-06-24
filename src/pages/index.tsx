@@ -17,11 +17,9 @@ const cssUUIDList = { "max-height": "50vh", overflow: "auto" };
 const cssContainer = { border: 1, borderRadius: "1rem", padding: ".5rem" };
 
 export default function Home() {
-  // const [UUIDs, setUUIDs] = useState<number>(1);
   const [UUIDArray, setUUIDArray] = useState<any[]>(["1"]);
 
   const UpdateUUDCount = (Num: number) => {
-    // setUUIDs(Num);
     let U: number[] = [];
     for (let i = 0; i < Num; i++) U.push(i);
     setUUIDArray(U);
