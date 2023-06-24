@@ -1,9 +1,9 @@
 "use client";
 // import dynamic from "next/dynamic";
 import { Box, TextField } from "@mui/material";
-import UUIDGenCount from "../../components/uuidcounter";
-import UUIDGen from "../../components/uuid";
-import JSONReader from "../../components/jsonreader";
+import UUIDGenCount from "../components/uuidcounter";
+import UUIDGen from "../components/uuid";
+import JSONReader from "../components/jsonreader";
 import { useState } from "react";
 
 const cssMain = {
