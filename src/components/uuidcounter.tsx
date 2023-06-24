@@ -15,7 +15,7 @@ export const UUIDGenerator = ({ onChange }: Props) => {
       value={UUID}
       variant="outlined"
       type="number"
-      helperText="Counts"
+      label="UUID Count"
       onChange={(e) => Update(parseInt(e.target.value))}
     />
   );
