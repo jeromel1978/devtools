@@ -5,7 +5,7 @@ import AutorenewIcon from "@mui/icons-material/Autorenew";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import Dialog from "@mui/material/Dialog";
 
-const cssContainer = { display: "flex", flexDirection: "row", padding: ".5rem" };
+const cssContainer = { display: "flex", flexDirection: "row", paddingY: ".5rem" };
 const cssDialog = { display: "flex", flexDirection: "column", padding: ".5rem" };
 
 type Props = {
