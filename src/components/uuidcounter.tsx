@@ -1,7 +1,5 @@
-"use client";
-import { useState, useEffect } from "react";
-import { v4 } from "uuid";
-import { TextField, Button, Box } from "@mui/material";
+import { useState } from "react";
+import { TextField, Box } from "@mui/material";
 type Props = {
   onChange: Function;
 };
@@ -13,15 +11,13 @@ export const UUIDGenerator = ({ onChange }: Props) => {
     onChange(Num);
   };
   return (
-    <Box>
-      <TextField
-        value={UUID}
-        variant="outlined"
-        type="number"
-        helperText="Counts"
-        onChange={(e) => Update(parseInt(e.target.value))}
-      />
-    </Box>
+    <TextField
+      value={UUID}
+      variant="outlined"
+      type="number"
+      helperText="Counts"
+      onChange={(e) => Update(parseInt(e.target.value))}
+    />
   );
 };
 export default UUIDGenerator;

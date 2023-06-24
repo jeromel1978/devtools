@@ -1,7 +1,5 @@
-"use client";
 import { useState } from "react";
-import { v4 } from "uuid";
-import { Button, Box } from "@mui/material";
+import { Box } from "@mui/material";
 import { TextField } from "@mui/material";
 
 export const UUIDGenerator = () => {

@@ -5,16 +5,19 @@ import UUIDGenCount from "../components/uuidcounter";
 import UUIDGen from "../components/uuid";
 import JSONReader from "../components/jsonreader";
 import { useState } from "react";
+import Layout from "../app/layout";
 
 const cssMain = {
   display: "flex",
-  "flex-direction": "column",
-  "min-height": "100%",
+  flexDirection: "column",
+  minHeight: "100%",
   width: "100%",
   gap: ".5rem",
 };
-const cssUUIDList = { "max-height": "50vh", overflow: "auto" };
-const cssContainer = { border: 1, borderRadius: "1rem", padding: ".5rem" };
+const cssUUIDList = { maxHeight: "50vh", overflow: "auto", width: "fit-content" };
+const cssContainer = (Width: string, MinWidth: string, MaxWidth: string) => {
+  return { border: 1, borderRadius: "1rem", padding: ".5rem", width: Width, minWidth: MinWidth, maxWidth: MaxWidth };
+};
 
 export default function Home() {
   const [UUIDArray, setUUIDArray] = useState<any[]>(["1"]);
@@ -25,8 +28,9 @@ export default function Home() {
     setUUIDArray(U);
   };
   return (
-    <main style={cssMain} className="flex min-h-screen flex-col items-center justify-between p-24 gap-2">
-      <Box sx={cssContainer}>
+    // <Layout>
+    <main className="flex">
+      <Box sx={cssContainer("fit-content", "", "100%")}>
         UUID v4
         <UUIDGenCount onChange={UpdateUUDCount} />
         <Box sx={cssUUIDList}>
@@ -35,10 +39,11 @@ export default function Home() {
           ))}
         </Box>
       </Box>
-      <Box sx={cssContainer}>
+      <Box sx={cssContainer("50%", "30rem", "100%")}>
         JSON Reader
         <JSONReader />
       </Box>
     </main>
+    //</Layout>
   );
 }
