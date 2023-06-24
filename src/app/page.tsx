@@ -4,7 +4,11 @@ import { Box, Tabs, Tab, Typography } from "@mui/material";
 import UUIDOptions from "../components/uuidoptions";
 import UUIDGen from "../components/uuid";
 import JSONReader from "../components/jsonreader";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import CssBaseline from "@mui/material/CssBaseline";
+import { ThemeProvider } from "@mui/material/styles";
+import ThemeLight from "../themes/light";
+import ThemeDark from "../themes/dark";
 
 const cssUUIDList = { maxHeight: "50vh", overflow: "auto", width: "fit-content" };
 
@@ -40,10 +44,19 @@ const TabPanel = (props: TabPanelProps) => {
   );
 };
 export default function Home() {
+  const [DarkMode, setDarkMode] = useState<string>("");
   const [value, setValue] = useState(0);
   const [UUIDArray, setUUIDArray] = useState<any[]>(["1"]);
   const [UUIDVersion, setUUIDVersion] = useState<number>(4);
 
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        setDarkMode("dark");
+      } else setDarkMode("light");
+    }
+    return;
+  }, [setDarkMode]);
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
@@ -57,22 +70,29 @@ export default function Home() {
     setUUIDVersion(Num);
   };
   return (
-    <main className="flex">
-      <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-        <Tab label="UUID Generator" />
-        <Tab label="JSON Reader" />
-      </Tabs>
-      <TabPanel value={value} index={0}>
-        <UUIDOptions onCountChange={UpdateUUIDCount} onVersionChange={UpdateUUIDVersion} />
-        <Box sx={cssUUIDList}>
-          {UUIDArray.map((a, index) => (
-            <UUIDGen key={index} version={UUIDVersion} />
-          ))}
-        </Box>
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        <JSONReader />
-      </TabPanel>
-    </main>
+    <>
+      {!!DarkMode && (
+        <ThemeProvider theme={DarkMode === "dark" ? ThemeDark : ThemeLight}>
+          <CssBaseline />
+          <main className="flex flex-col">
+            <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+              <Tab label="UUID Generator" />
+              <Tab label="JSON Reader" />
+            </Tabs>
+            <TabPanel value={value} index={0}>
+              <UUIDOptions onCountChange={UpdateUUIDCount} onVersionChange={UpdateUUIDVersion} />
+              <Box sx={cssUUIDList}>
+                {UUIDArray.map((a, index) => (
+                  <UUIDGen key={index} version={UUIDVersion} />
+                ))}
+              </Box>
+            </TabPanel>
+            <TabPanel value={value} index={1}>
+              <JSONReader />
+            </TabPanel>
+          </main>
+        </ThemeProvider>
+      )}
+    </>
   );
 }
