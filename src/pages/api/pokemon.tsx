@@ -7,5 +7,6 @@ export default function Git_Test(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "GET") {
     const ID: string | string[] | undefined = req.query[`ID`];
     if (ID) res.status(200).send({ message: "ID" });
+    else res.status(422).send({ message: "ID" });
   }
 }
