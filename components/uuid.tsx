@@ -10,8 +10,10 @@ export const UUIDGenerator = () => {
   };
   return (
     <Box>
-      <TextField value={UUID} />
-      <Button onClick={Regen}>Test</Button>
+      <TextField value={UUID} variant="outlined" helperText="UUID v4" />
+      <Button onClick={Regen} variant="outlined">
+        Test
+      </Button>
     </Box>
   );
 };
