@@ -43,12 +43,12 @@ export const UUIDGenerator = ({ version }: Props) => {
           <Button onClick={CloseModal}>OK</Button>
         </Box>
       </Dialog>
-      <Button onClick={Copy} variant="outlined">
-        <ContentCopyIcon />
-      </Button>
-      <TextField value={UUID} variant="outlined" label={`v${version}`} />
       <Button onClick={Regen} variant="outlined">
         <AutorenewIcon />
+      </Button>
+      <TextField value={UUID} variant="outlined" label={`v${version}`} />
+      <Button onClick={Copy} variant="outlined">
+        <ContentCopyIcon />
       </Button>
     </Box>
   );

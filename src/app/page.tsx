@@ -46,6 +46,7 @@ const TabPanel = (props: TabPanelProps) => {
 export default function Home() {
   const [DarkMode, setDarkMode] = useState<string>("");
   const [value, setValue] = useState(0);
+  const [UUIDCount, setUUIDCount] = useState<number>(1);
   const [UUIDArray, setUUIDArray] = useState<any[]>(["1"]);
   const [UUIDVersion, setUUIDVersion] = useState<number>(4);
 
@@ -62,6 +63,7 @@ export default function Home() {
   };
 
   const UpdateUUIDCount = (Num: number) => {
+    setUUIDCount(Num);
     let U: number[] = [];
     for (let i = 0; i < Num; i++) U.push(i);
     setUUIDArray(U);
@@ -81,7 +83,11 @@ export default function Home() {
                 <Tab label="JSON Reader" />
               </Tabs>
               <TabPanel value={value} index={0}>
-                <UUIDOptions onCountChange={UpdateUUIDCount} onVersionChange={UpdateUUIDVersion} />
+                <UUIDOptions
+                  InitialCount={UUIDCount}
+                  onCountChange={UpdateUUIDCount}
+                  onVersionChange={UpdateUUIDVersion}
+                />
                 <Box sx={cssUUIDList}>
                   {UUIDArray.map((a, index) => (
                     <UUIDGen key={index} version={UUIDVersion} />
