@@ -1,6 +1,6 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
-import { ClerkProvider } from "@clerk/nextjs";
+// import { ClerkProvider } from "@clerk/nextjs";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -11,16 +11,16 @@ export const metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <ClerkProvider>
-      <html lang="en">
-        <head>
-          <title>{metadata.title}</title>
-          <meta property="og:title" content={metadata.title} key="title" />
-          <link rel="icon" href="favicon.svg" type="image/svg+xml" />
-          <link rel="shortcut icon" href="favicon.svg" type="image/svg+xml" />
-        </head>
-        <body className="m-0 p-0">{children}</body>
-      </html>
-    </ClerkProvider>
+    // <ClerkProvider>
+    <html lang="en">
+      <head>
+        <title>{metadata.title}</title>
+        <meta property="og:title" content={metadata.title} key="title" />
+        <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+        <link rel="shortcut icon" href="favicon.svg" type="image/svg+xml" />
+      </head>
+      <body className="m-0 p-0">{children}</body>
+    </html>
+    // </ClerkProvider>
   );
 }
