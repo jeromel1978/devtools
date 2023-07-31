@@ -23,9 +23,10 @@ export const UUIDGenerator = () => {
   };
   return (
     <Box sx={{ display: "flex", flexDirection: "column", gap: ".5rem" }}>
+      <div>{Invalid ? "True" : "False"}</div>
       <TextField
         fullWidth
-        value={Original}
+        value={Original ?? ""}
         variant="outlined"
         label="Original"
         minRows="5"
@@ -35,7 +36,7 @@ export const UUIDGenerator = () => {
         sx={cssOriginal}
       />
       <TextField
-        value={Converted}
+        value={Converted ?? ""}
         variant="outlined"
         label="Converted"
         minRows="5"

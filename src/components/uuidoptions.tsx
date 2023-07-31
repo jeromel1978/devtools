@@ -32,7 +32,7 @@ export const UUIDOptions = ({ InitialCount, onCountChange, onVersionChange }: Pr
         <Select
           labelId="uuid-version-label"
           variant="outlined"
-          value={Version}
+          value={Version ?? ""}
           label="Ver"
           onChange={(e) => UpdateVersion(e.target.value as number)}
         >

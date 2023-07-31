@@ -11,7 +11,7 @@ export const JSONConverter = () => {
   const ConvertToCSV = (Text: string) => {
     setOriginal(Text);
     try {
-      setConverted(JSON.stringify(Parse.unparse(JSON.parse(Original)), null, 2));
+      setConverted(Parse.unparse(JSON.parse(Original)));
       setInvalid(false);
     } catch (e) {
       setInvalid(true);
@@ -20,11 +20,26 @@ export const JSONConverter = () => {
   const ConvertToJSON = (Text: string) => {
     setOriginal(Text);
     try {
-      setConverted(JSON.stringify(Parse.unparse(JSON.parse(Original)), null, 2));
+      Parse.parse(Original, CSVOptions);
       setInvalid(false);
     } catch (e) {
       setInvalid(true);
     }
+  };
+
+  const CSVOptions = {
+    delimiter: ",",
+    quoteChar: '"',
+    header: true,
+    dynamicTyping: true,
+    delimitersToGuess: [",", "\t", "|", ";", Parse.RECORD_SEP, Parse.UNIT_SEP],
+    step: (results: any, parser: any) => {
+      console.log("Row data:", results.data);
+      console.log("Row errors:", results.errors);
+    },
+    complete: (results: any) => {
+      setOriginal(JSON.stringify(results));
+    },
   };
 
   const cssOriginal = { color: Invalid ? "red" : "blue" };
@@ -35,9 +50,9 @@ export const JSONConverter = () => {
     <Box sx={{ display: "flex", flexDirection: "column", gap: ".5rem" }}>
       <TextField
         fullWidth
-        value={Original}
+        value={Original ?? ""}
         variant="outlined"
-        label="Original"
+        label="JSON"
         minRows="5"
         multiline
         onChange={(e) => ConvertToCSV(e.target.value)}
@@ -45,14 +60,14 @@ export const JSONConverter = () => {
         sx={cssOriginal}
       />
       <TextField
-        value={Converted}
-        variant="outlined"
-        label="Converted"
-        minRows="5"
-        maxRows="15"
-        className="w-fill"
-        multiline
         fullWidth
+        value={Converted ?? ""}
+        variant="outlined"
+        label="CSV"
+        minRows="5"
+        multiline
+        onChange={(e) => ConvertToJSON(e.target.value)}
+        maxRows="15"
         sx={cssConverted}
       />
     </Box>

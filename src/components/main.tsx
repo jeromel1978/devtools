@@ -3,6 +3,7 @@ import dynamic from "next/dynamic";
 import { Box, Tabs, Tab } from "@mui/material";
 import UUIDOptions from "./uuidoptions";
 import UUIDGen from "./uuid";
+import JSONReader from "./jsonreader";
 import JSONConverter from "./jsonconverter";
 import { useState, useEffect } from "react";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -98,7 +99,7 @@ export default function Home() {
               </Box>
             </TabPanel>
             <TabPanel value={value} index={1}>
-              <JSONConverter />
+              <JSONReader />
             </TabPanel>
             <TabPanel value={value} index={2}>
               <JSONConverter />
